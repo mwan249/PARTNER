@@ -1,3 +1,4 @@
+load_report = function(token){
 url <- "https://redcap.emory.edu/api/"
 formData <- list("token"=token,
                  content='report',
@@ -12,5 +13,6 @@ formData <- list("token"=token,
 response <- httr::POST(url, body = formData, encode = "form")
 result <- httr::content(response)
 result
+}  
 
 
