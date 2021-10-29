@@ -27,8 +27,14 @@ ReadRedcapReport = function(
   readr::read_csv(httr::content(response,as="text"),...)
 }
 
-
 DownloadData = function(){
-  d = ReadRedcapReport(report_id='31632')
+  d = ReadRedcapReport(report_id='31632') |> 
+    filter(redcap_event_name == "baseline_arm_3") |> 
+    mutate(sex = case_when(
+      sex___1 == 1 ~ "Male",
+      sex___2 == 1 ~ "Female"
+    )) |> 
+    select(age, sex, everything()) |> 
+    rename(Age = age, Sex = sex)
   d
 }

@@ -18,7 +18,9 @@ library(tidyverse)
 source("utilities.R")
 ```
 
+## Demographic and clinical characteristics
 ```{r}
 d = DownloadData()
+arsenal::tableby(~Age+Sex, data = d) |> summary(digits=1) |> knitr::kable()
 ```
 
