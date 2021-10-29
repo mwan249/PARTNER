@@ -19,6 +19,6 @@ source("utilities.R")
 ```
 
 ```{r}
-d = ReadRedcapReport(report_id='31632')
+d = DownloadData()
 ```
 

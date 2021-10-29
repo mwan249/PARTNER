@@ -26,3 +26,9 @@ ReadRedcapReport = function(
   response <- httr::POST(url, body = form.data, encode = "form")
   readr::read_csv(httr::content(response,as="text"),...)
 }
+
+
+DownloadData = function(){
+  d = ReadRedcapReport(report_id='31632')
+  d
+}
