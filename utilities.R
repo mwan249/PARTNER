@@ -11,5 +11,6 @@ formData <- list("token"=token,
 )
 response <- httr::POST(url, body = formData, encode = "form")
 result <- httr::content(response)
-print(result)
+result
+
 
