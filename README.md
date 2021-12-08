@@ -9,13 +9,13 @@ etc.
 
 ## Demographic and clinical characteristics
 
-|              | Overall (N=19) |
+|              | Overall (N=22) |
 |:-------------|:---------------|
 | **Age**      |                |
-|    N-Miss    | 19             |
-|    Mean (SD) | NA             |
-|    Range     | NA             |
+|    N-Miss    | 7              |
+|    Mean (SD) | 71.5 (5.7)     |
+|    Range     | 58.0 - 82.0    |
 | **Sex**      |                |
-|    N-Miss    | 3              |
-|    Female    | 10 (62.5%)     |
-|    Male      | 6 (37.5%)      |
+|    N-Miss    | 2              |
+|    Female    | 13 (65.0%)     |
+|    Male      | 7 (35.0%)      |
