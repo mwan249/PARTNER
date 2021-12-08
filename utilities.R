@@ -3,7 +3,7 @@ library(tidyverse)
 ReadRedcapReport = function(
   token = Sys.getenv("redcap_token"),
   url = "https://redcap.emory.edu/api/",
-  report_id = '29228',
+  report_id = '31632',
   format='csv',
   csvDelimiter='',
   rawOrLabel='raw',
@@ -29,12 +29,14 @@ ReadRedcapReport = function(
 
 DownloadData = function(){
   d = ReadRedcapReport(report_id='31632') |> 
-    filter(redcap_event_name == "baseline_arm_3") |> 
     mutate(sex = case_when(
       sex___1 == 1 ~ "Male",
       sex___2 == 1 ~ "Female"
     )) |> 
     select(age, sex, everything()) |> 
-    rename(Age = age, Sex = sex)
-  d
+    rename(Age = age, Sex = sex) |> 
+    group_by(participants) |> 
+    fill(c(Age,Sex),.direction="downup") |> 
+  filter(redcap_event_name == "baseline_arm_3")
+    d
 }
