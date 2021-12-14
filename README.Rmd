@@ -18,9 +18,60 @@ library(tidyverse)
 source("utilities.R")
 ```
 
+## Workflow
+
+1. Modify report on Redcap.
+2. Download data (code below).
+3. Create tables of data indicating missing/extreme values.
+4. Fix missing/extreme values.
+5. Return to 1.
+
 ## Demographic and clinical characteristics
 ```{r}
+
 d = DownloadData()
-arsenal::tableby(~Age+Sex, data = d) |> summary(digits=1) |> knitr::kable()
+
+ redcap_event_names = c(
+ "screening_arm_2",
+ "informed_consent_arm_2",
+ "prefg_arm_1",
+ "randomization_arm_3",
+ "baseline_arm_3",
+ "3month_arm_3",
+ "78_month_screening_arm_3",
+ "12month_arm_3",
+ "intervention_arm_3",
+ "monthly_checkin_arm_3") 
+
+d_baseline_arm_3 = DownloadData("baseline_arm_3")
+d_3month_arm_3 = DownloadData("3month_arm_3")
+ 
+arsenal::tableby(~Age+Sex+MoCA+BDIII, data = d_baseline_arm_3) |> summary(digits=1) |> knitr::kable()
+```
+
+## Cognitive outcomes
+
+```{r}
+
+```
+
+
+## Screen missing values
+
+```{r}
+findMissing = function(d,varname){
+  dmiss = d[,c("participants",varname)]
+  d[is.na(d[,varname]),"participants"]
+}
+
+findMissing(d_baseline_arm_3,"MoCA")
+findMissing(d_baseline_arm_3,"Age")
+findMissing(d_baseline_arm_3,"Sex")
+
+# missing_data = c("Age","Sex","MoCA") |> lapply(function(v) findMissing(d,v))
+
+
+
+
 ```
 
