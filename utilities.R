@@ -27,7 +27,7 @@ ReadRedcapReport = function(
   readr::read_csv(httr::content(response,as="text"),...)
 }
 
-DownloadData = function(){
+DownloadData = function(redcap_event_name = "baseline_arm_3"){
   d = ReadRedcapReport(report_id='31632') |> 
     mutate(sex = case_when(
       sex___1 == 1 ~ "Male",
@@ -37,6 +37,9 @@ DownloadData = function(){
     rename(Age = age, Sex = sex) |> 
     group_by(participants) |> 
     fill(c(Age,Sex),.direction="downup") |> 
-  filter(redcap_event_name == "baseline_arm_3")
-    d
+  filter(redcap_event_name == redcap_event_name)
+    d |> 
+      rename(MoCA = moca_total) |> 
+      rename(BDIII = bdi_total_score) |> 
+      rename(TICS = total_score)
 }
