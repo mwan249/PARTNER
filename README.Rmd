@@ -26,7 +26,10 @@ source("utilities.R")
 4. Fix missing/extreme values.
 5. Return to 1.
 
-## Demographic and clinical characteristics
+## Baseline demographic and clinical characteristics
+
+Baseline and clinical characteristics at Redcap event `baseline_arm_3` are as follows:
+
 ```{r}
 
 d = DownloadData()
@@ -51,27 +54,18 @@ arsenal::tableby(~Age+Sex+MoCA+BDIII, data = d_baseline_arm_3) |> summary(digits
 
 ## Cognitive outcomes
 
-```{r}
+Cognitive outcomes at Redcap event `3month_arm_3` are as follows:
 
+```{r}
+arsenal::tableby(~MoCA, data = d_3month_arm_3) |> summary(digits=1) |> knitr::kable()
 ```
 
 
 ## Screen missing values
 
 ```{r}
-findMissing = function(d,varname){
-  dmiss = d[,c("participants",varname)]
-  d[is.na(d[,varname]),"participants"]
-}
-
-findMissing(d_baseline_arm_3,"MoCA")
-findMissing(d_baseline_arm_3,"Age")
-findMissing(d_baseline_arm_3,"Sex")
-
-# missing_data = c("Age","Sex","MoCA") |> lapply(function(v) findMissing(d,v))
-
-
-
-
+FindMissing(d_baseline_arm_3,"MoCA")
+FindMissing(d_baseline_arm_3,"Age")
+FindMissing(d_baseline_arm_3,"Sex")
 ```
 
